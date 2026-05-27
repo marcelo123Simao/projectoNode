@@ -107,10 +107,6 @@ router.post("/registrar", async (req, res) => {
     }
 
 });
-// de login
-router.get('/usuarios/login', function(req, res) {
-    res.render("usuarios/login");
-}); 
 
 router.post('/login', (req, res, next) => {
     passport.authenticate('local', {

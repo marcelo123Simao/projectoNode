@@ -19,8 +19,8 @@ const db = require("./config/db")
 //CONFIGURAÇÕES
 app.use(session({
     secret: 'simao',
-    resave: true,
-    saveUninitialized: true
+    resave: false,
+    saveUninitialized: false
 }));
 
 app.use(passport.initialize())
@@ -127,33 +127,31 @@ app.get('/categorias', function(req, res){
 app.get('/categorias/:slug', function(req, res){
 
     Categoria.findOne({ slug: req.params.slug }).lean()
-
     .then((categorias) => {
 
-        console.log("Categoria encontrada:")
-        console.log(categorias)
-
-        if(categorias){
-
-            Postagem.find({ categoria: categorias._id }).lean()
-
-            .then((postagem) => {
-
-                console.log("POSTAGENS ENCONTRADAS:")
-                console.log(postagem)
-
-                res.render("categorias/postagens", {
-                    postagem: postagem,
-                    categorias: categorias
-                });
-
-            })
-
+        if(!categorias){
+            req.flash("error_msg", "Categoria não encontrada.");
+            return res.redirect("/");
         }
 
-    })
+        return Postagem.find({ categoria: categorias._id }).lean()
+        .then((postagem) => {
 
-})
+            res.render("categorias/postagens", {
+                postagem: postagem,
+                categorias: categorias
+            });
+
+        });
+
+    })
+    .catch((err) => {
+        console.log(err);
+        req.flash("error_msg", "Erro ao carregar categoria.");
+        res.redirect("/");
+    });
+
+});
 
 // ROTA 404 (sempre no final)
 app.use(function(req, res, next){
