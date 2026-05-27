@@ -161,7 +161,7 @@ app.use(function(req, res, next){
 });
 
 //OUTROS CONEXÃOES
-const PORT = process.env.PORT || 8089;
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, function() {
     console.log("Servidor rodando na porta " + PORT);
 });
