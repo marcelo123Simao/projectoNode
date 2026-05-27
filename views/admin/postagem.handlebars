@@ -1,0 +1,26 @@
+<h2>Listas de Postagem</h2>
+<a href="/admin/postagens/add" class="btn btn-primary">Adicionar Postagens Nova</a>
+
+{{#each posts}}
+<div class="card mt-4">
+<div class="card-body">
+    <h4>{{titulo}}</h4>
+    <small><b>Slug:</b> {{slug}}</small> <br>
+    <small><b>Descrição:</b> {{descricao}}</small> <br>
+    <small><b>Conteúdo:</b> {{conteudo}}</small> <br>
+    <small><b>Categoria:</b> {{categoria}}</small> <br>
+    <small><b>data:</b>{{date}}</small><br>
+    <a href="/admin/editpostagem/{{_id}}" class="btn btn-success mt-4">
+    Editar Postagem
+   </a>
+
+  <form action="/admin/postagem/deletar" method="POST">
+    <input type="hidden" name="id" value="{{_id}}">
+    <button type="submit" class="btn btn-danger mt-2">
+        Deletar
+    </button>
+</form>
+
+</div>
+</div>
+{{/each}}

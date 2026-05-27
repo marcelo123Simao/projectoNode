@@ -1,0 +1,32 @@
+<div class="p-5 mb-4 bg-light rounded-3">
+  <div class="container-fluid py-5">
+    <h1 class="display-5 fw-bold">Bem-vindo ao BlogApp</h1>
+    <p class="col-md-8 fs-4">
+      Este é um exemplo moderno de um projecto que estou a desenvolver Marcelo Simão O Poeta.
+    </p>
+    <button class="btn btn-dark btn-lg">
+      Começar
+    </button>
+  </div>
+</div>
+
+<hr>
+
+<h2>Postagens Recentes</h2>
+
+{{#each postagems}}
+<div class="card m-3">
+    <div class="card-body">
+        <h3>{{titulo}}</h3>
+        <p>{{descricao}}</p>
+       <a href="/leiaMais/{{slug}}" class="btn btn-outline-dark btn-sm px-3 py-2">
+        Continuar a leitura →
+       </a>
+           <hr>
+        <small><b>Categoria: </b> {{categoria.nome}}</small><br>
+        <small><b>Data da Publicação: </b> {{date}}  </small> 
+    </div>
+</div>
+{{else}}
+<h5>Nenhuma postagem cadastrada</h5>
+{{/each}}
