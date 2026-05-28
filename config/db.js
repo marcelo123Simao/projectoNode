@@ -1,5 +1,11 @@
-if(process.env.NODE_ENV == "production"){
-   module.exports = {mongoURI: "mongodb+srv://simao:marcelo12345@@aws.vpqdnco.mongodb.net/?appName=AWS"} 
-} else{
-    module.exports = {mongoURI: "mongodb://127.0.0.1:27017/blogapp"}
+const mongoose = require("mongoose")
+
+module.exports = async () => {
+   try{
+      await mongoose.connect(process.env.MONGO_URI)
+      console.log("MongoDB conectado")
+   }catch(err){
+      console.log(err)
+      process.exit(1)
+   }
 }

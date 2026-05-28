@@ -92,6 +92,7 @@ router.post("/registrar", async (req, res) => {
             nome,
             email,
             senha: hash,
+            eAdmin:1
         });
 
         await novoUsuario.save();

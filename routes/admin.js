@@ -53,7 +53,7 @@ router.post('/categorias/nova', eAdmin, function(req, res) {
 });
 
 //Rota do formulario de adicionar novas categorias
-router.get('/categorias/add', eAdmin, function(req, res) {
+router.get('/categorias/add',function(req, res) {
     res.render("admin/addcategorias");
 });
 
@@ -107,7 +107,7 @@ router.post('/categorias/deletar', async (req, res) => {
 })
 */
 
-router.get("/postagens/add", eAdmin, (req, res) => {
+router.get("/postagens/add",(req, res) => {
 
     Categoria.find().lean()
 

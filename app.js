@@ -1,4 +1,5 @@
 //CARREGANDO MODULOS
+require("dotenv").config()
 const express = require('express');
 const { engine } = require('express-handlebars');
 const bodyParser = require('body-parser');
@@ -15,7 +16,9 @@ require("./models/Categoria")
 const Categoria= mongoose.model("Categoria")
 const passport = require("passport")
 require("./config/auth")(passport)
-const db = require("./config/db")
+const connectDB = require("./config/db")
+connectDB()
+
 //CONFIGURAÇÕES
 app.use(session({
     secret: 'simao',
@@ -54,7 +57,7 @@ app.engine('handlebars', engine({
 }));
 app.set('view engine', 'handlebars');
 
-// C0NEXAÕ DO BANCO DE DADOS COM MONGOOSE
+/*C0NEXAÕ DO BANCO DE DADOS COM MONGOOSE
 mongoose.Promise = global.Promise;
 mongoose.connect(db.mongoURI)
 .then(() => {
@@ -63,6 +66,7 @@ mongoose.connect(db.mongoURI)
 .catch((err) => {
     console.log("Erro ao se conectar ao MongoDB: " + err);
 });
+*/
 
 //PUBLIC
 app.use(express.static(path.join(__dirname, 'public')));
